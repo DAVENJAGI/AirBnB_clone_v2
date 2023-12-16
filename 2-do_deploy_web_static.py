@@ -11,9 +11,7 @@ enf.key_filename = '~/ssh/ssh_keypairs'
 
 
 def do_deploy(archive_path):
-    """
-    deploy files to server
-    """
+    """deploy files to server"""
 
     try:
         if not (path.exists(archive_path)):
