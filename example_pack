@@ -22,12 +22,14 @@ def do_pack():
         local("tar -czvf versions/{}.tgz web_static"
               .format(filename))
 
+        # join the new pack to the versions folder
         file_path = os.path.join("versions", filename)
+        print(file_path)
 
         # get the size of file
         file_size = os.path.getsize("versions/{}".format(filename))
 
-        print("web_static packed: versions/{} -> {}Bytes" .format(file_path, file_size))
+        print("web_static packed: versions/{} -> {}Bytes".format(filth, file_size))
 
         return filename
 
