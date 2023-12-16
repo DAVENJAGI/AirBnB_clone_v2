@@ -2,7 +2,7 @@
 #Bashscript that sets upa  web server for deploymenr of web_static Air_BnB clone
 
 sudo apt-get update
-sudo apt-get install nginx
+sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 
 sudo mkdir -p /data/
