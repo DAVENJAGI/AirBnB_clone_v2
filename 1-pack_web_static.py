@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import fabric
 from fabric.api import local
 from time import strftime
 from datetime import date
