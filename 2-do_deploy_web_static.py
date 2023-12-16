@@ -49,7 +49,7 @@ def do_deploy(archive_path):
         run('sudo ln -s /data/web_static/releases/ \
                 web_static_{}/ /data/web_static/current' .format(timestamp))
 
-    except Exception as e:
+    except:
         return False
 
     # return true on the process
