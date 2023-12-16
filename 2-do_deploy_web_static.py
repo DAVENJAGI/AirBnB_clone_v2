@@ -34,12 +34,12 @@ def do_deploy(archive_path):
         run('sudo rm /tmp/web_static_{].tgz' .format(timestamp))
 
         # move the contents to web_static
-        run('sudo mv /data/web_staticc/releases/web_static_{}/web_static/* \
+        run('sudo mv /data/web_static/releases/web_static_{}/web_static/* \
                 /data/web_static/releases/web_static_{}/'
             .format(timestamp, timestamp))
 
         # remove extraneous web_static directory
-        run('sudo rm -rf /data/web_static/releases/ \
+        run('sudo rmdir /data/web_static/releases/ \
                 web_static_{}/web_static' .format(timestamp))
 
         # delete pre existing symbolic link
@@ -49,7 +49,7 @@ def do_deploy(archive_path):
         run('sudo ln -s /data/web_static/releases/ \
                 web_static_{}/ /data/web_static/current' .format(timestamp))
 
-    except:
+    except Exception as e:
         return False
 
     # return true on the process
