@@ -5,7 +5,7 @@ from fabric.api import *
 from datetime import datetime
 import os
 
-env.host = ['100.25.133.127', '34.224.63.130']
+env.hosts = ['100.25.133.127', '34.224.63.130']
 env.user = 'ubuntu'
 env.key_filename = '~/ssh/ssh_keypairs'
 
@@ -30,24 +30,24 @@ def do_deploy(archive_path):
         run('sudo mkdir -p {}' .format(folder))
 
         # uncompress the archive to the folder and delete  .tgz
-        run('sudo tar -xzf /tmp/{} -C {}'.format(archive_name, folder))
+        run('tar -xzf /tmp/{} -C {}'.format(archive_name, folder))
 
         # remove the archive
-        run('sudo rm /tmp/{}' .format(archive_name))
+        run('rm /tmp/{}' .format(archive_name))
 
         # move the contents to web_static
-        run('sudo mv {}/web_static/* {}/' .format(folder, folder))
+        run('mv {}/web_static/* {}/' .format(folder, folder))
 
         # remove extraneous web_static directory
-        run('sudo rmdir {}/web_static' .format(folder))
+        run('rmdir {}/web_static' .format(folder))
 
         # delete pre existing symbolic link
-        run('sudo rm -rf /data/web_static/current')
+        run('rm -rf /data/web_static/current')
 
         present_link = '/data/web_static/current'
 
         # create a new symbollic linked to the new code version
-        run('sudo ln -sf {} {}' .format(folder, present_link))
+        run('ln -sf {} {}' .format(folder, present_link))
 
         #print new version deployed and return true
         print("New version deployed")
@@ -58,4 +58,4 @@ def do_deploy(archive_path):
         return False
 
 if __name__ == "__main__":
-    do_deploy("/versions/archive_path.tgz")
+    do_deploy(/versions/archive_path.tgz)
