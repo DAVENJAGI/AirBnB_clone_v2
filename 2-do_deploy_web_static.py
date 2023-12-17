@@ -16,7 +16,7 @@ def do_deploy(archive_path):
     if not os.path.exists(archive_path):
         print("Archive does not exist")
         return False
-    
+
     try:
         # upload archive using the put command
         put(archive_path, '/tmp/')
@@ -49,7 +49,7 @@ def do_deploy(archive_path):
         # create a new symbollic linked to the new code version
         run('ln -sf {} {}' .format(folder, present_link))
 
-        #print new version deployed and return true
+        # print new version deployed and return true
         print("New version deployed")
         return True
 
@@ -57,5 +57,6 @@ def do_deploy(archive_path):
         print(f"Error during deployment: {e}")
         return False
 
+
 if __name__ == "__main__":
-    do_deploy(archive_path.tgz)
+    do_deploy(archive_path)
