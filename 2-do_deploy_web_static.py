@@ -30,7 +30,7 @@ def do_deploy(archive_path):
         run('sudo mkdir -p {}' .format(folder))
 
         # uncompress the archive to the folder and delete  .tgz
-        run('sudo tar -xzf /tmp/{} -C {}'.formart(archive_name, folder))
+        run('sudo tar -xzf /tmp/{} -C {}'.format(archive_name, folder))
 
         # remove the archive
         run('sudo rm /tmp/{}' .format(archive_name))
@@ -54,7 +54,8 @@ def do_deploy(archive_path):
         return True
 
     except Exception as e:
+        print(f"Error during deployment: {e}")
         return False
 
 if __name__ == "__main__":
-    do_deploy(archive_path)
+    do_deploy("/versions/archive_path.tgz")
