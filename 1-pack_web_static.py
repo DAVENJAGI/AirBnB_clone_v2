@@ -6,6 +6,7 @@ from time import strftime
 from datetime import datetime
 import os
 
+
 def do_pack():
     """Script that generetes a tgz archive from content of web_static"""
 
@@ -22,12 +23,15 @@ def do_pack():
         local("tar -czvf versions/{}.tgz web_static"
               .format(filename))
 
-        file_path = os.path.join("versions", filename)
+        # join the new pack to the versions folder
+        file_path = os.path.join("versions", (filename))
+#        print(file_path)
 
-        # get the size of file
-        file_size = os.path.getsize("versions/{}".format(filename))
+        # get the size of file andprint it with the print function.
+        file_size = os.path.getsize("versions/{}.tgz" .format(filename))
 
-        print("web_static packed: versions/{} -> {}Bytes" .format(file_path, file_size))
+        print("web_static packed: versions/{}.tgz -> {}Bytes"
+              .format(filename, file_size))
 
         return filename
 
