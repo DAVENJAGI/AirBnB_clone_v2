@@ -58,4 +58,4 @@ def do_deploy(archive_path):
         return False
 
 if __name__ == "__main__":
-    do_deploy(/versions/archive_path.tgz)
+    do_deploy(archive_path.tgz)
