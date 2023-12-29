@@ -30,24 +30,24 @@ def do_deploy(archive_path):
         run('sudo mkdir -p {}' .format(folder))
 
         # uncompress the archive to the folder and delete  .tgz
-        run('tar -xzf /tmp/{} -C {}'.format(archive_name, folder))
+        run('sudo tar -xzf /tmp/{} -C {}'.format(archive_name, folder))
 
         # remove the archive
-        run('rm /tmp/{}' .format(archive_name))
+        run('sudo rm /tmp/{}' .format(archive_name))
 
         # move the contents to web_static
-        run('mv {}/web_static/* {}/' .format(folder, folder))
+        run('sudo mv {}/web_static/* {}/' .format(folder, folder))
 
         # remove extraneous web_static directory
-        run('rmdir {}/web_static' .format(folder))
+        run('sudo rmdir {}/web_static' .format(folder))
 
         # delete pre existing symbolic link
-        run('rm -rf /data/web_static/current')
+        run('sudo rm -rf /data/web_static/current')
 
         present_link = '/data/web_static/current'
 
         # create a new symbollic linked to the new code version
-        run('ln -sf {} {}' .format(folder, present_link))
+        run('sudo ln -sf {} {}' .format(folder, present_link))
 
         # print new version deployed and return true
         print("New version deployed")
