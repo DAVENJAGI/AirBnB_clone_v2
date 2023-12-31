@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+A Script that imports flask, render_template, storage
+and state and displays it after it's sorted in order
+"""
 from flask import Flask, render_template
 from models import storage
 from models.state import State
