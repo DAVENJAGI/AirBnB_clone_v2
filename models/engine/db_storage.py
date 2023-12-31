@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""database storage using mysql"""
+"""
+database storage using mysql
+It imports modules from the respective directories
+"""
 
 import os
 from sqlalchemy import create_engine
@@ -12,33 +15,45 @@ from models.review import Review
 from models.state import State
 from models.place import Place
 
+"""
+The code defines a dictionary classes that
+maps class names to actual class objects
+"""
 classes = {"User": User, "State": State, "City": City, "Amenity": Amenity,
            "Place": Place, "Review": Review}
 
 
 class DBStorage:
-    """private class attributes"""
+    """private class attributes __engine and __session"""
 
     __engine = None
     __session = None
 
     def __init__(self):
-        """instantiate class DBStorage"""
+        """instantiate class DBStorage object.
+        It retrieves necessary environment variables
+        for connecting to the database"""
         HBNB_MYSQL_USER = os.getenv("HBNB_MYSQL_USER")
         HBNB_MYSQL_PWD = os.getenv("HBNB_MYSQL_PWD")
         HBNB_MYSQL_HOST = os.getenv("HBNB_MYSQL_HOST")
         HBNB_MYSQL_DB = os.getenv("HBNB_MYSQL_DB")
         HBNB_ENV = os.getenv("HBNB_ENV")
 
+        """
+        Creates a SQLAlchemy engine using the create_engine function
+        """
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".format(
             HBNB_MYSQL_USER, HBNB_MYSQL_PWD, HBNB_MYSQL_HOST, HBNB_MYSQL_DB),
                                       pool_pre_ping=True)
 
+        """If environment is set to test,
+        it drops all tables in the database"""
         if HBNB_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """queries on the current database session"""
+        """queries the current database session
+        for all objects of a given class if cls is not specifies"""
         obj_dict = {}
         classes = [User, State, City, Place, Review]
 
@@ -52,7 +67,7 @@ class DBStorage:
         return obj_dict
 
     def new(self, obj):
-        """add object to db session"""
+        """add an object to a db session and raises and exception if there's an error"""
         if obj is not None:
             try:
                 self.__session.add(obj)
@@ -72,7 +87,8 @@ class DBStorage:
             self.__session.delete(obj)
 
     def reload(self):
-        """Creates all tables in the database using the metadata"""
+        """Creates all tables in the database using the SQLAlchemy metadata
+        and setsup sessionmaker with the engine. It assigns the session to the private __session attributes"""
         Base.metadata.create_all(self.__engine)
         Base.metadata.bind = self.__engine
         session = sessionmaker(bind=self.__engine)
