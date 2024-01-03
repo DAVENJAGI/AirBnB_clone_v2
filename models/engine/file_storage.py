@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""This module defines a class to manage file storage for hbnb clone"""
-"""Imports modules and classes from models file"""
-import json
+"""This module defines a class to manage file storage for hbnb clone
+imports modules and classes from models file"""
+
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -9,8 +9,10 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+import json
 
-"""Defines a dictionary called classes that maps names to their respective classes"""
+"""Defines a dictionary called classes that maps names to theiri
+respective classes"""
 classes = {
         'BaseModel': BaseModel, 'User': User, 'Place': Place,
         'State': State, 'City': City, 'Amenity': Amenity,
@@ -22,7 +24,9 @@ class FileStorage:
     """
     This class manages storage of hbnb models in JSON format
     """
-    """THe class takes two public attributes. __File_path is the path to which the object will be stored. __object is a dictionary that will hold the objects"""
+    """THe class takes two public attributes.
+    __File_path is the path to which the object will be stored.
+    __object is a dictionary that will hold the objects"""
     __file_path = 'file.json'
     __objects = {}
 

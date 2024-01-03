@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from models import storage_type
+from models.city import City
 
 
 class State(BaseModel, Base):
@@ -17,14 +18,14 @@ class State(BaseModel, Base):
     else:
         name = ""
 
-        @property
-        def cities(self):
-            """rerurn list of cities instance of state_id equal to state.id"""
+    @property
+    def cities(self):
+        """rerurn list of cities instance of state_id equal to state.id"""
 
-            from models import storage
-            related_city = []
-            cities = storage.all(City)
-            for city in cities.value():
-                if city.state_id == self.id:
-                    related_city.append(city)
-            return related_city
+        from models import storage
+        related_city = []
+        cities = storage.all(City)
+        for city in cities.value():
+            if city.state_id == self.id:
+                related_city.append(city)
+        return related_city

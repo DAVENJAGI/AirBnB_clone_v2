@@ -67,7 +67,8 @@ class DBStorage:
         return obj_dict
 
     def new(self, obj):
-        """add an object to a db session and raises and exception if there's an error"""
+        """add an object to a db session and raises
+        and exception if there's an error"""
         if obj is not None:
             try:
                 self.__session.add(obj)
@@ -87,8 +88,10 @@ class DBStorage:
             self.__session.delete(obj)
 
     def reload(self):
-        """Creates all tables in the database using the SQLAlchemy metadata
-        and setsup sessionmaker with the engine. It assigns the session to the private __session attributes"""
+        """Creates all tables in the database using
+        the SQLAlchemy metadata
+        and setsup sessionmaker with the engine.
+        It assigns the session to the private __session attributes"""
         Base.metadata.create_all(self.__engine)
         Base.metadata.bind = self.__engine
         session = sessionmaker(bind=self.__engine)

@@ -57,7 +57,8 @@ class BaseModel:
         if "_sa_instance_state" in dictionary.keys():
             dictionary.pop("_sa_instance_state")
 
-        dictionary['created_at'] = self.created_at.isoformat() if self.created_at else None
+        dictionary['created_at'] = self.created_at.isoformat()
+        if self.created_at else None
         dictionary['updated_at'] = self.updated_at.isoformat()
         return dictionary
 
