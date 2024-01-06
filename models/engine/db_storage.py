@@ -98,6 +98,16 @@ class DBStorage:
         Session = scoped_session(session)
         self.__session = Session
 
+    def get(self, cls, id):
+        """A method to retrieve one object"""
+        query = self.__session.query(cls).filter(cls.id == id)
+        return query.first()
+
+    def count(self, cls=None):
+        """counts the number of object in storage"""
+        obj = self.all(cls)
+        return len(obj)
+
     def close(self):
         """close session"""
         self.__session.close()
